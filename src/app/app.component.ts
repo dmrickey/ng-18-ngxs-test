@@ -24,23 +24,25 @@ export class AppComponent implements OnInit {
 
   store = inject(Store);
 
-  @Select((state: any) => state.user.firstName) firstName$!: Observable<string>;
-  @Select((state: any) => state.user.lastName) lastName$!: Observable<string>;
-  @Select((state: any) => state.user.userId) userId$!: Observable<string>;
+  @Select((state: any) => state.user.firstName) selectDecoratorFirstName!: Observable<string>;
+  @Select((state: any) => state.user.lastName) selectDecoratorLastName$!: Observable<string>;
+  @Select((state: any) => state.user.userId) selectDecoratorUserId$!: Observable<string>;
+  @Select((state: any) => state.user) selectDecoratorUser$!: Observable<UserStateModel>;
 
-  user$ = this.store.select(UserState.getUser);
-  @Select((state: any) => state.user) user2$!: Observable<UserStateModel>;
+  selectorUser$ = this.store.select(UserState.getUser);
+  utilSelectorFirstName$ = this.store.select(UserState.selectors.firstName);
 
   ngOnInit(): void {
-    this.user$.subscribe((user) => console.log('user changed', user));
-    this.user2$.subscribe((user2) => console.log('user2 changed', user2));
+    this.selectorUser$.subscribe((user) => console.log('selector user changed', user));
+    this.utilSelectorFirstName$.subscribe((name) => console.log('util selector first name changed', name));
+    this.selectDecoratorUser$.subscribe((user2) => console.log('selector decorator changed', user2));
 
-    this.userId$.subscribe((userId) => console.log('user id changed:', userId));
-    this.firstName$.subscribe((firstName) =>
-      console.log('first name changed:', firstName)
+    this.selectDecoratorUserId$.subscribe((userId) => console.log('selector decorator user id changed:', userId));
+    this.selectDecoratorFirstName.subscribe((firstName) =>
+      console.log('selector decorator first name changed:', firstName)
     );
-    this.lastName$.subscribe((lastName) =>
-      console.log('last name changed:', lastName)
+    this.selectDecoratorLastName$.subscribe((lastName) =>
+      console.log('selector decorator last name changed:', lastName)
     );
   }
 

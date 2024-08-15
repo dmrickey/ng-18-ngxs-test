@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { Action, Selector, State, StateContext, createPropertySelectors  } from '@ngxs/store';
 import { SetUser } from './user.actions';
 
 export interface UserStateModel {
@@ -19,8 +19,8 @@ export interface UserStateModel {
   defaults: {
     userId: '1234',
     email: '',
-    firstName: 'David',
-    lastName: 'Rickey',
+    firstName: 'First Name',
+    lastName: 'Last Name',
     fullName: '',
     positionId: '',
     positionName: '',
@@ -34,6 +34,8 @@ export class UserState {
   static getUser(state: UserStateModel): UserStateModel {
     return state;
   }
+
+  static selectors = createPropertySelectors<UserStateModel>(UserState);
 
   @Action(SetUser)
   setUser(ctx: StateContext<UserStateModel>, { payload }: SetUser) {
