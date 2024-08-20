@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, createPropertySelectors  } from '@ngxs/store';
-import { SetUser } from './user.actions';
+import { SetFirstName, SetLastName, SetUser } from './user.actions';
 
 export interface UserStateModel {
   userId: string;
@@ -35,10 +35,35 @@ export class UserState {
     return state;
   }
 
-  static selectors = createPropertySelectors<UserStateModel>(UserState);
+  @Selector()
+  static getFirstName(state: UserStateModel): string {
+    return state.firstName;
+  }
+
+  @Selector()
+  static getLastName(state: UserStateModel): string {
+    return state.lastName;
+  }
+
+  // doesn't work when defined within state class
+  // static getSlices = createPropertySelectors<UserStateModel>(UserState);
 
   @Action(SetUser)
   setUser(ctx: StateContext<UserStateModel>, { payload }: SetUser) {
     ctx.setState(payload);
   }
+
+  @Action(SetFirstName)
+  setFirstName(ctx: StateContext<UserStateModel>, { firstName }: SetFirstName) {
+    ctx.patchState({ firstName });
+  }
+
+  @Action(SetLastName)
+  setLastName(ctx: StateContext<UserStateModel>, { lastName }: SetLastName) {
+    ctx.patchState({ lastName });
+  }
+}
+
+export class UserSelectors {
+  static getSlices = createPropertySelectors<UserStateModel>(UserState);
 }
