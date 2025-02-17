@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "test:include": "ng test --include"
   },
   "private": true,
   "dependencies": {
@@ -18,10 +19,10 @@
     "@angular/platform-browser": "^18.1.0",
     "@angular/platform-browser-dynamic": "^18.1.0",
     "@angular/router": "^18.1.0",
-    "@ngxs/devtools-plugin": "18.1.1",
-    "@ngxs/logger-plugin": "^18.1.1",
-    "@ngxs/router-plugin": "18.1.1",
-    "@ngxs/store": "^18.1.1",
+    "@ngxs/devtools-plugin": "18.1.6",
+    "@ngxs/logger-plugin": "^18.1.6",
+    "@ngxs/router-plugin": "18.1.6",
+    "@ngxs/store": "^18.1.6",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

@@ -37,6 +37,13 @@
           }
         }
       }
+    },
+    {
+      "type": "shell",
+      "command": "npm run test:include ${relativeFile}",
+      "problemMatcher": [],
+      "label": "Test current file",
+      "detail": "ng test --include"
     }
   ]
 }
